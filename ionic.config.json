@@ -1,0 +1,7 @@
+{
+  "name": "MR-Notes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
