@@ -36,8 +36,11 @@
       </ion-item-sliding>
     </ion-list>
 
+    <div *ngIf="listNotes.length === 0" class="ion-text-center">
+      <img src="../../assets/img/firstNote.png" alt="Create your first note!" >
+      <h4>Create your first note !</h4>
+    </div>
     
-
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button color="light" (click)="addNote()">
         <ion-icon name="add"></ion-icon>

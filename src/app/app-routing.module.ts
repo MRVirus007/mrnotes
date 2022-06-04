@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'notes/create',
+    loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
+  },
+  {
     path: 'notes/:id',
     loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
   }

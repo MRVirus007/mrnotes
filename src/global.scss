@@ -38,10 +38,34 @@ ion-header {
     ion-toolbar{
         --background: #252525;
         margin-top: 1em;
+        ion-buttons {
+            ion-button {
+                border-radius: 1em;
+                background: #3b3b3b;
+            }
+            .m-r-16px {
+                margin-right: 16px;
+            }
+        }
     }
 }
 
 .searchbar-input.sc-ion-searchbar-md ,.searchbar-input.sc-ion-searchbar-ios{
     --background: #3b3b3b;
     border-radius: 2em;
+}
+
+ion-content{
+    --ion-background-color:#252525;
+}
+.header-md::after, .header-ios::after {
+    background: none;
+}
+
+ion-title {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 43px;
+    line-height: 59px;
 }

@@ -1,21 +1,24 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/notes"></ion-back-button>
+      <ion-button routerLink="/notes">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>{{ note.title }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="deleteNote()">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
+    <ion-buttons slot="end" class="ion-margin-end">
+      <ion-button class="m-r-16px">
+        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="save-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-input placeholder="Title"></ion-input>
   <ion-textarea
-    (input)="noteChanged()"
-    [(ngModel)]="note.content"
-    placeholder="...something on your mind?"
+    placeholder="Type something..."
   ></ion-textarea>
 </ion-content>

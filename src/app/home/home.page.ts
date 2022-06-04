@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import { NotesService } from '../services/notes.service';
 @Component({
@@ -9,7 +10,7 @@ import { NotesService } from '../services/notes.service';
 export class HomePage {
   public isSearchbarOpened  = false;
   listNotes = [];
-  constructor(public notesService: NotesService , private alertCtrl: AlertController, private navCtrl: NavController){
+  constructor(public notesService: NotesService, private router: Router){
     this.loadNotes();
   }
 
@@ -23,9 +24,8 @@ export class HomePage {
     });
   }
 
-  async addNote(){
-    await this.notesService.addNote(`Mohammed ${Math.floor(Math.random() * 100)}`);
-    this.loadNotes();
+  addNote(){
+    this.router.navigate(['/notes/create']);
   }
 
   async removeNote(index){

@@ -1,20 +1,4 @@
-ion-content{
-    --ion-background-color:#252525;
-}
-
-.header-md::after, .header-ios::after {
-    background: none;
-}
-
-ion-title {
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 43px;
-    line-height: 59px;
-}
-
-ion-toolbar {
+ion-toolbar{
     ion-buttons {
         ion-button {
             border-radius: 1em;
@@ -22,6 +6,22 @@ ion-toolbar {
         }
         .m-r-16px {
             margin-right: 16px;
+        }
+    }
+}
+
+ion-content {
+    .ion-text-center {
+        img {
+            max-width: 22em;
+        }
+        h4 {
+            margin-top: 0;
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 27px;
         }
     }
 }
