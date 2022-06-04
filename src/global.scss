@@ -24,3 +24,24 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('assets/fonts/Nunito-SemiBold.ttf');
+}
+
+ion-app {
+    background: #252525;
+}
+
+ion-header {
+    ion-toolbar{
+        --background: #252525;
+        margin-top: 1em;
+    }
+}
+
+.searchbar-input.sc-ion-searchbar-md ,.searchbar-input.sc-ion-searchbar-ios{
+    --background: #3b3b3b;
+    border-radius: 2em;
+}

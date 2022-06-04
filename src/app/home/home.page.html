@@ -1,20 +1,46 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title *ngIf="!isSearchbarOpened">
+      Notes
     </ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="addNote()">
+        <ion-icon slot="icon-only" name="clipboard"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false">
+    </ion-searchbar>
+    <ion-buttons slot="end" class="ion-margin-end">
+      <ion-button class="m-r-16px" *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+    <ion-list *ngIf="listNotes.length > 0">
+      <ion-item-sliding *ngFor="let note of listNotes; let i = index">
+        <ion-item>
+          <ion-label>{{note}}</ion-label>
+        </ion-item>
+        <!-- Slide Left to Remove -->
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="removeNote(i)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="light" (click)="addNote()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
