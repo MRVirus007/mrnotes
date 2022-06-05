@@ -1,11 +1,14 @@
 ion-toolbar{
+    ion-searchbar {
+        margin-top: 1em;
+    }
     ion-buttons {
         ion-button {
             border-radius: 1em;
             background: #3b3b3b;
         }
         .m-r-16px {
-            margin-right: 16px;
+            margin-right: 1rem;
         }
     }
 }

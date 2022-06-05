@@ -8,7 +8,7 @@
         <ion-icon slot="icon-only" name="clipboard"></ion-icon>
       </ion-button>
     </ion-buttons> -->
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false">
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false" placeholder="Search by the keyword...">
     </ion-searchbar>
     <ion-buttons slot="end" class="ion-margin-end">
       <ion-button class="m-r-16px" *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">

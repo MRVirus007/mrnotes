@@ -5,26 +5,24 @@ ion-toolbar{
             background: #3b3b3b;
         }
         .m-r-16px {
-            margin-right: 16px;
+            margin-right: 1rem;
         }
     }
 }
 
 ion-content {
-    ion-input {
+    ion-input, ion-textarea {
         font-family: Nunito;
-        font-size: 48px;
         font-weight: 400;
-        line-height: 65px;
         letter-spacing: 0em;
         text-align: left;
     }
+    ion-input {
+        font-size: 48px;
+        line-height: 65px;
+    }
     ion-textarea {
-        font-family: Nunito;
         font-size: 23px;
-        font-weight: 400;
         line-height: 31px;
-        letter-spacing: 0em;
-        text-align: left;
     }
 }
