@@ -14,15 +14,11 @@ ion-content {
     ion-input, ion-textarea {
         font-family: Nunito;
         font-weight: 400;
-        letter-spacing: 0em;
-        text-align: left;
     }
     ion-input {
-        font-size: 48px;
-        line-height: 65px;
+        font-size: 3rem;
     }
     ion-textarea {
-        font-size: 23px;
-        line-height: 31px;
+        font-size: 1.4375rem;
     }
 }

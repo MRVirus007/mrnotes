@@ -1,44 +1,67 @@
 import { Injectable } from '@angular/core';
 import { Note } from '../interfaces/note';
 import { Storage } from '@ionic/storage-angular';
-import * as cordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
-import { BehaviorSubject, from, of } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-const STORAGE_KEY = 'notes';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { Platform, ToastController} from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  private storageReady = new BehaviorSubject(false);
-  constructor(private storage: Storage) {
-    this.init();
+  public notes: Note[] = [];
+  readonly dbName: string = 'notes_db';
+  readonly dbTable: string = 'notes';
+  private dbInstance: SQLiteObject;
+  constructor(private platform: Platform, private sqlite: SQLite,public toastController: ToastController) {
+    this.databaseConn();
   }
 
-  async init() {
-    await this.storage.defineDriver(cordovaSQLiteDriver);
-    await this.storage.create();
-    this.storageReady.next(true);
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 5000
+    });
+    toast.present();
   }
 
-  getNotes() {
-    return this.storageReady.pipe(
-      // eslint-disable-next-line arrow-body-style
-      filter(ready => ready), switchMap(_ => {
-        return from(this.storage.get(STORAGE_KEY)) || of([]);
-      })
-    );
+  // Create SQLite database
+  databaseConn() {
+    this.platform.ready().then(() => {
+      this.sqlite.create({
+          name: this.dbName,
+          location: 'default'
+        }).then((sqLite: SQLiteObject) => {
+          this.dbInstance = sqLite;
+          sqLite.executeSql(`
+              CREATE TABLE IF NOT EXISTS ${this.dbTable} (
+                note_id INTEGER PRIMARY KEY, 
+                title nvarchar(255),
+                content ntext
+              )`, [])
+            .then((res) => {
+              this.presentToast('Success in db creation');
+            })
+            .catch((error) => this.presentToast(JSON.stringify(error)));
+        })
+        .catch((error) => this.presentToast(JSON.stringify(error)));
+    });
   }
 
-  async addNote(note) {
-    const storedNotes = await this.storage.get(STORAGE_KEY) || [];
-    storedNotes.push(note);
-    return this.storage.set(STORAGE_KEY, storedNotes);
-  }
-
-  async removeNote(index) {
-    const storedNotes = await this.storage.get(STORAGE_KEY) || [];
-    storedNotes.splice(index, 1);
-    return this.storage.set(STORAGE_KEY, storedNotes);
-  }
+    // Crud
+    public addNote(note) {
+      // validation
+      if (!note.title.length || !note.content.length) {
+        this.presentToast('Provide both title and content');
+        return;
+      }
+      this.dbInstance.executeSql(`
+      INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
+        .then(() => {
+          this.presentToast('Note Inserted Successfully');
+        }, (err) => {
+          this.presentToast(JSON.stringify(err.err));
+        });
+    }
 
 }

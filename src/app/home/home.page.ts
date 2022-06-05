@@ -11,30 +11,17 @@ export class HomePage {
   public isSearchbarOpened  = false;
   listNotes = [];
   constructor(public notesService: NotesService, private router: Router){
-    this.loadNotes();
   }
 
   onInit(){
-  }
-
-  async loadNotes(){
-    //this.listNotes = await this.notesService.getNotes();
-    this.notesService.getNotes().subscribe(res => {
-      this.listNotes = res;
-    });
   }
 
   addNote(){
     this.router.navigate(['/notes/create']);
   }
 
-  async removeNote(index){
-    this.notesService.removeNote(index);
-    this.listNotes.splice(index, 1);
-  }
-
   onSearch(event){
-    console.log('event: ', event.target.value);
+    this.notesService.presentToast(event.target.value);
   }
 
 }
