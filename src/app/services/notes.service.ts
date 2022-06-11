@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/quotes */
 import { Injectable } from '@angular/core';
 import { Note } from '../interfaces/note';
 import { Storage } from '@ionic/storage-angular';
@@ -20,6 +21,14 @@ export class NotesService {
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async presentToastResult(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
       duration: 5000
     });
     toast.present();
@@ -36,32 +45,41 @@ export class NotesService {
           sqLite.executeSql(`
               CREATE TABLE IF NOT EXISTS ${this.dbTable} (
                 note_id INTEGER PRIMARY KEY, 
-                title nvarchar(255),
-                content ntext
+                title nvarchar(255) null,
+                content ntext null
               )`, [])
-            .then((res) => {
-              this.presentToast('Success in db creation');
-            })
             .catch((error) => this.presentToast(JSON.stringify(error)));
         })
         .catch((error) => this.presentToast(JSON.stringify(error)));
     });
   }
 
-    // Crud
     public addNote(note) {
       // validation
-      if (!note.title.length || !note.content.length) {
-        this.presentToast('Provide both title and content');
+      if (!note.title.length) {
+        this.presentToast("'Title can't be empty");
         return;
       }
       this.dbInstance.executeSql(`
       INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
         .then(() => {
-          this.presentToast('Note Inserted Successfully');
+          this.presentToast('Note Saved Successfully');
         }, (err) => {
           this.presentToast(JSON.stringify(err.err));
         });
     }
 
+    getAllNotes() {
+      return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
+        this.notes = [];
+        if (res.rows.length > 0) {
+          for (let i = 0; i < res.rows.length; i++) {
+            this.notes.push(res.rows.item(i));
+          }
+          return this.notes;
+        }
+      },(e) => {
+        alert(JSON.stringify(e));
+      });
+    }
 }

@@ -22,21 +22,62 @@
 </ion-header>
 
 <ion-content>
-    <ion-list *ngIf="listNotes.length > 0">
-      <ion-item-sliding *ngFor="let note of listNotes; let i = index">
+    <ion-list *ngIf="notesService.notes.length > 0">
+      <ion-item-sliding *ngFor="let note of notesService.notes; let i = index">
         <ion-item>
-          <ion-label>{{note}}</ion-label>
+          <ion-label>{{note.title}}</ion-label>
         </ion-item>
         <!-- Slide Left to Remove -->
         <ion-item-options side="end">
-          <ion-item-option color="primary" (click)="removeNote(i)">
+          <ion-item-option color="primary">
             <ion-icon name="trash" slot="icon-only"></ion-icon>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
 
-    <div *ngIf="listNotes.length === 0" class="ion-text-center">
+    <ion-list>
+      <ion-item-sliding >
+        <ion-item>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Card Title</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+        <!-- Slide Left to Remove -->
+        <ion-item-options side="end">
+          <ion-card color="danger">
+            <ion-item-option color="danger">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-card>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-item-sliding >
+        <ion-item>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Card Title</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+        <!-- Slide Left to Remove -->
+        <ion-item-options side="end">
+          <ion-item-option color="primary">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Card Title</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <div *ngIf="notesService.notes.length === 0" class="ion-text-center">
       <img src="../../assets/img/firstNote.png" alt="Create your first note!" >
       <h4>Create your first note !</h4>
     </div>

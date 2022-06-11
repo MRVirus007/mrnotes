@@ -17,6 +17,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-input placeholder="Title" [(ngModel)]='note.title'></ion-input>
-  <ion-textarea [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
+  <ion-textarea placeholder="Title" [(ngModel)]='note.title' maxLength="100"></ion-textarea>
+  <ion-textarea autoGrow="true" [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
 </ion-content>

@@ -10,10 +10,17 @@ import { NotesService } from '../services/notes.service';
 export class HomePage {
   public isSearchbarOpened  = false;
   listNotes = [];
+  //dynamic hex color variable
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+  //for selected colors
+  colors = ['#FD99FF', '#FF9E9E', '#91F48F', '#FFF599', '#9EFFFF', '#B69CFF', '#30BE71', '#FF0000'];
   constructor(public notesService: NotesService, private router: Router){
+    //this.getNotes();
   }
 
-  onInit(){
+  ionViewDidEnter() {
+    this.notesService.getAllNotes();
   }
 
   addNote(){
@@ -24,4 +31,28 @@ export class HomePage {
     this.notesService.presentToast(event.target.value);
   }
 
+  //dynamically change title bg color
+  changeColorHex(): string {
+    let hexColor = '#';
+    for (let i = 0; i < 6; i++) {
+      hexColor += this.hex[this.getRandomNumberForHex()];
+    }
+    //console.log(hexColor);
+    //color.textContent = hexColor;
+    //document.body.style.backgroundColor = hexColor;
+    return hexColor;
+  }
+
+  getRandomNumberForHex() {
+    return Math.floor(Math.random() * this.hex.length);
+  }
+
+  changeColor(): string {
+    const randomNumber = this.getRandomNumber();
+    return this.colors[randomNumber];
+  }
+
+  getRandomNumber() {
+    return Math.floor(Math.random() * this.colors.length);
+  }
 }

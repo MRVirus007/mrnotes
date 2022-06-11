@@ -16,7 +16,8 @@ export class DetailPage implements OnInit {
     public notesService: NotesService,
     private navCtrl: NavController) {
     this.note = {
-      id: null,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      note_id: null,
       title: '',
       content: ''
     };

@@ -1,3 +1,4 @@
+$list: '#FD99FF', '#FF9E9E', '#91F48F', '#FFF599', '#9EFFFF', '#B69CFF', '#30BE71', '#FF0000';
 ion-toolbar{
     ion-searchbar {
         margin-top: 1em;
@@ -23,6 +24,31 @@ ion-content {
             font-family: 'Nunito';
             font-style: normal;
             font-weight: 300;
+        }
+    }
+    ion-card {
+        box-shadow: none;
+        border-radius: 0.875rem;
+        ion-card-header {
+            ion-card-title {
+                font-family: 'Nunito';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 25px;
+                // color: #000;
+            }
+        }
+    }
+}
+
+ion-list {
+    background: transparent;
+    ion-item-sliding {
+        ion-item {
+            --ion-item-background: transparent;
+            ion-card {
+                width: 100%;
+            }
         }
     }
 }
