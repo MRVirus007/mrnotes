@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
 import { NotesService } from '../services/notes.service';
 @Component({
   selector: 'app-home',
@@ -10,6 +9,7 @@ import { NotesService } from '../services/notes.service';
 export class HomePage {
   public isSearchbarOpened  = false;
   listNotes = [];
+  searchText: string;
   //dynamic hex color variable
   // eslint-disable-next-line @typescript-eslint/member-ordering
   hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];

@@ -8,8 +8,8 @@
         <ion-icon slot="icon-only" name="clipboard"></ion-icon>
       </ion-button>
     </ion-buttons> -->
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false" placeholder="Search by the keyword...">
-    </ion-searchbar>
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false" name="search" [(ngModel)]="searchText" placeholder="Search by the keyword..."> 
+    </ion-searchbar> 
     <ion-buttons slot="end" class="ion-margin-end">
       <ion-button class="m-r-16px" *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
@@ -23,29 +23,14 @@
 
 <ion-content>
     <ion-list *ngIf="notesService.notes.length > 0">
-      <ion-item-sliding *ngFor="let note of notesService.notes; let i = index">
+      <ion-item-sliding *ngFor="let note of notesService.notes | filter: searchText ; let i = index">
         <ion-item>
-          <ion-label>{{note.title}}</ion-label>
-        </ion-item>
-        <!-- Slide Left to Remove -->
-        <ion-item-options side="end">
-          <ion-item-option color="primary">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-
-    <ion-list>
-      <ion-item-sliding >
-        <ion-item>
-          <ion-card>
+          <ion-card [style.backgroundColor]="changeColor()">
             <ion-card-header>
-              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-title>{{note.title}}</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-item>
-        <!-- Slide Left to Remove -->
         <ion-item-options side="end">
           <ion-card color="danger">
             <ion-item-option color="danger">
@@ -54,28 +39,60 @@
           </ion-card>
         </ion-item-options>
       </ion-item-sliding>
+    </ion-list>
+
+    <!-- <ion-list>
       <ion-item-sliding >
         <ion-item>
-          <ion-card>
+          <ion-card [style.backgroundColor]="changeColor()">
             <ion-card-header>
-              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-title>UI concepts worth existing</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-item>
-        <!-- Slide Left to Remove -->
         <ion-item-options side="end">
-          <ion-item-option color="primary">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
+          <ion-card color="danger">
+            <ion-item-option color="danger">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-card>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-list>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Card Title</ion-card-title>
-      </ion-card-header>
-    </ion-card>
+      <ion-item-sliding >
+        <ion-item>
+          <ion-card [style.backgroundColor]="changeColor()">
+            <ion-card-header>
+              <ion-card-title>Book Review : The Design of Everyday Things by Don Norman</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-card color="danger">
+            <ion-item-option color="danger">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-card>
+        </ion-item-options>
+      </ion-item-sliding>
+
+      <ion-item-sliding >
+        <ion-item>
+          <ion-card [style.backgroundColor]="changeColor()">
+            <ion-card-header>
+              <ion-card-title>Animes produced by Ufotable</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-card color="danger">
+            <ion-item-option color="danger">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-card>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list> -->
 
     <div *ngIf="notesService.notes.length === 0" class="ion-text-center">
       <img src="../../assets/img/firstNote.png" alt="Create your first note!" >
@@ -86,5 +103,5 @@
       <ion-fab-button color="light" (click)="addNote()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-    </ion-fab>
+    </ion-fab> 
 </ion-content>

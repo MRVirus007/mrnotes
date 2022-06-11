@@ -1,7 +1,7 @@
 $list: '#FD99FF', '#FF9E9E', '#91F48F', '#FFF599', '#9EFFFF', '#B69CFF', '#30BE71', '#FF0000';
 ion-toolbar{
     ion-searchbar {
-        margin-top: 1em;
+        margin: 1em 0.4em 0;
     }
     ion-buttons {
         ion-button {
@@ -35,7 +35,7 @@ ion-content {
                 font-style: normal;
                 font-weight: 400;
                 font-size: 25px;
-                // color: #000;
+                color: #000;
             }
         }
     }
