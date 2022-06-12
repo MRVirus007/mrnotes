@@ -14,7 +14,7 @@ export class HomePage {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
   //for selected colors
-  colors = ['#FD99FF', '#FF9E9E', '#91F48F', '#FFF599', '#9EFFFF', '#B69CFF', '#30BE71', '#FF0000'];
+  colors = ['#3880ff', '#3dc2ff', '#5260ff', '#2dd36f', '#ffc409', '#eb445a', '#92949c'];
   constructor(public notesService: NotesService, private router: Router){
     //this.getNotes();
   }

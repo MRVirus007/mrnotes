@@ -25,7 +25,7 @@ export class NotesService {
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000
+      duration: 2000
     });
     toast.present();
   }
@@ -60,7 +60,7 @@ export class NotesService {
     INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
       .then(() => {
         this.presentToast('Note Saved Successfully');
-        //this.router.navigate(['/notes']);
+        this.router.navigate(['/notes']);
       }, (err) => {
         this.presentToast(JSON.stringify(err.err));
       });

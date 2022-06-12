@@ -18,7 +18,11 @@ ion-content {
         img {
             max-width: 22em;
         }
-        h4 {
+        p{
+            padding-left:0.625rem;
+            padding-right: 0.625rem;
+        }
+        h4,p {
             margin-top: 0;
             font-family: 'Nunito';
             font-style: normal;

@@ -25,7 +25,7 @@
     <ion-list *ngIf="notesService.notes.length > 0">
       <ion-item-sliding *ngFor="let note of notesService.notes | filter: searchText ; let i = index">
         <ion-item (click)="goToEdit(note.note_id)">
-          <ion-card>
+          <ion-card [style.backgroundColor]="changeColor()">
             <ion-card-header>
               <ion-card-title>{{note.title}}</ion-card-title>
             </ion-card-header>
@@ -97,6 +97,7 @@
     <div *ngIf="notesService.notes.length === 0" class="ion-text-center">
       <img src="../../assets/img/firstNote.png" alt="Create your first note!" >
       <h4>Create your first note !</h4>
+      <p>Note: You can Swipe from right to Delete a Note.</p>
     </div>
     
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
