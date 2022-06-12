@@ -59,7 +59,6 @@ export class NotesService {
     this.dbInstance.executeSql(`
     INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
       .then(() => {
-        this.presentToast('Note Saved Successfully');
         this.router.navigate(['/notes']);
       }, (err) => {
         this.presentToast(JSON.stringify(err.err));
@@ -74,9 +73,8 @@ export class NotesService {
       return;
     }
     const data = [title, content];
-    return this.dbInstance.executeSql(`UPDATE ${this.dbTable} SET title = ?, content = ? WHERE note_id = ${id}`, data).then(() => {
-      this.presentToast('Note Saved Successfully');
-    }, (err) => {
+    return this.dbInstance.executeSql(`UPDATE ${this.dbTable} SET title = ?, content = ? WHERE note_id = ${id}`, data)
+    .catch(err => {
       this.presentToast(JSON.stringify(err));
     });
   }
@@ -104,8 +102,8 @@ export class NotesService {
         }
         return this.notes;
       }
-    },(e) => {
-      alert(JSON.stringify(e));
+    },(err) => {
+      this.presentToast(JSON.stringify(err));
     });
   }
 
@@ -114,7 +112,6 @@ export class NotesService {
     this.dbInstance.executeSql(`
     DELETE FROM ${this.dbTable} WHERE note_id = ${id}`, [])
       .then(() => {
-        this.presentToast('Note Deleted Successfully');
         this.getAllNotes();
       })
       .catch(err => {

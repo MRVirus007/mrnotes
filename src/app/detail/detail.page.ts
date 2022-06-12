@@ -29,8 +29,8 @@ export class DetailPage implements OnInit {
   async presentAlertMultipleButtons() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-alert',
-      header: ``,
-      subHeader: 'Save changes ?',
+      header: 'Save changes ?',
+      subHeader: '',
       message: '',
       buttons: [{
         text:'Discard',

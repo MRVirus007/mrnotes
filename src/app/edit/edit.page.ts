@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { Note } from '../interfaces/note';
 import { NotesService } from '../services/notes.service';
 
 @Component({
@@ -19,7 +17,6 @@ export class EditPage implements OnInit {
     private router: Router,
     ) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    // eslint-disable-next-line radix
     this.notesService.getNote(this.id).then((res) => {
       this.title = res.title;
       this.content = res.content;

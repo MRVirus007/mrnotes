@@ -8,53 +8,25 @@ import { NotesService } from '../services/notes.service';
 })
 export class HomePage {
   public isSearchbarOpened  = false;
-  listNotes = [];
   searchText: string;
-  //dynamic hex color variable
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
-  //for selected colors
   colors = ['#3880ff', '#3dc2ff', '#5260ff', '#2dd36f', '#ffc409', '#eb445a', '#92949c'];
-  constructor(public notesService: NotesService, private router: Router){
-    //this.getNotes();
-  }
-
+  constructor(public notesService: NotesService, private router: Router){}
   ionViewDidEnter() {
     this.notesService.getAllNotes();
   }
-
   addNote(){
     this.router.navigate(['/notes/create']);
   }
-
   remove(id) {
     this.notesService.deleteNote(id);
   }
-  //dynamically change title bg color
-  changeColorHex(): string {
-    let hexColor = '#';
-    for (let i = 0; i < 6; i++) {
-      hexColor += this.hex[this.getRandomNumberForHex()];
-    }
-    //console.log(hexColor);
-    //color.textContent = hexColor;
-    //document.body.style.backgroundColor = hexColor;
-    return hexColor;
-  }
-
-  getRandomNumberForHex() {
-    return Math.floor(Math.random() * this.hex.length);
-  }
-
   changeColor(): string {
     const randomNumber = this.getRandomNumber();
     return this.colors[randomNumber];
   }
-
   getRandomNumber() {
     return Math.floor(Math.random() * this.colors.length);
   }
-
   goToEdit(id) {
     this.router.navigate(['/edit', id]);
   }

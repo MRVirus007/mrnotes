@@ -67,6 +67,10 @@ ion-title {
     font-family: Nunito;
     font-weight: 400;
     font-size: 1.4375rem;
+    .alert-wrapper.ion-overlay-wrapper.sc-ion-alert-md{
+        background: #252525;
+        padding: 0 0 15px 5px;
+    }
     .alert-button-group.sc-ion-alert-md {
         button {
             color: #FFFFFF;
@@ -74,6 +78,7 @@ ion-title {
             text-transform: capitalize;
             padding-left: 25px;
             padding-right: 25px;
+            font-size: 1.125rem;
         }
         .danger-class {
             background: var(--ion-color-danger);
