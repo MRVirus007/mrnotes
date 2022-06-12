@@ -21,15 +21,7 @@ export class NotesService {
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
-
-  async presentToastResult(msg: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 5000
+      duration: 3000
     });
     toast.present();
   }
@@ -54,32 +46,75 @@ export class NotesService {
     });
   }
 
-    public addNote(note) {
-      // validation
-      if (!note.title.length) {
-        this.presentToast("'Title can't be empty");
-        return;
-      }
-      this.dbInstance.executeSql(`
-      INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
-        .then(() => {
-          this.presentToast('Note Saved Successfully');
-        }, (err) => {
-          this.presentToast(JSON.stringify(err.err));
-        });
+  public addNote(note) {
+    // validation
+    if (!note.title.length) {
+      this.presentToast("'Title can't be empty");
+      return;
     }
-
-    getAllNotes() {
-      return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
-        this.notes = [];
-        if (res.rows.length > 0) {
-          for (let i = 0; i < res.rows.length; i++) {
-            this.notes.push(res.rows.item(i));
-          }
-          return this.notes;
-        }
-      },(e) => {
-        alert(JSON.stringify(e));
+    this.dbInstance.executeSql(`
+    INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
+      .then(() => {
+        this.presentToast('Note Saved Successfully');
+      }, (err) => {
+        this.presentToast(JSON.stringify(err.err));
       });
+  }
+
+   // Update
+  updateNote(id, title, content) {
+    //validation
+    if(!title.length) {
+      this.presentToast("'Title can't be empty");
+      return;
     }
+    const data = [title, content];
+    return this.dbInstance.executeSql(`UPDATE ${this.dbTable} SET title = ?, content = ? WHERE note_id = ${id}`, data).then(() => {
+      this.presentToast('Note Saved Successfully');
+    }, (err) => {
+      this.presentToast(JSON.stringify(err));
+    });
+  }
+
+  // Get Note
+  getNote(id): Promise<any> {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable} WHERE note_id = ?`, [id])
+    .then((res) => ({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        note_id: res.rows.item(0).note_id,
+        title: res.rows.item(0).title,
+        content: res.rows.item(0).content,
+      }))
+      .catch(err => {
+        this.presentToast(JSON.stringify(err));
+      });
+  }
+
+  getAllNotes() {
+    return this.dbInstance.executeSql(`SELECT * FROM ${this.dbTable}`, []).then((res) => {
+      this.notes = [];
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
+          this.notes.push(res.rows.item(i));
+        }
+        return this.notes;
+      }
+    },(e) => {
+      alert(JSON.stringify(e));
+    });
+  }
+
+  // Delete
+  deleteNote(id) {
+    this.dbInstance.executeSql(`
+    DELETE FROM ${this.dbTable} WHERE note_id = ${id}`, [])
+      .then(() => {
+        this.presentToast('Note Deleted Successfully');
+        this.getAllNotes();
+      })
+      .catch(err => {
+        this.presentToast(JSON.stringify(err));
+      });
+  }
+
 }

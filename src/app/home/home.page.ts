@@ -27,10 +27,9 @@ export class HomePage {
     this.router.navigate(['/notes/create']);
   }
 
-  onSearch(event){
-    this.notesService.presentToast(event.target.value);
+  remove(id) {
+    this.notesService.deleteNote(id);
   }
-
   //dynamically change title bg color
   changeColorHex(): string {
     let hexColor = '#';
@@ -54,5 +53,9 @@ export class HomePage {
 
   getRandomNumber() {
     return Math.floor(Math.random() * this.colors.length);
+  }
+
+  goToEdit(id) {
+    this.router.navigate(['/edit', id]);
   }
 }

@@ -8,13 +8,13 @@
         <ion-icon slot="icon-only" name="clipboard"></ion-icon>
       </ion-button>
     </ion-buttons> -->
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false" name="search" [(ngModel)]="searchText" placeholder="Search by the keyword..."> 
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (ionCancel)="isSearchbarOpened=false" name="search" [(ngModel)]="searchText" placeholder="Search by the keyword..."> 
     </ion-searchbar> 
     <ion-buttons slot="end" class="ion-margin-end">
       <ion-button class="m-r-16px" *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+      <ion-button *ngIf="!isSearchbarOpened">
         <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -24,8 +24,8 @@
 <ion-content>
     <ion-list *ngIf="notesService.notes.length > 0">
       <ion-item-sliding *ngFor="let note of notesService.notes | filter: searchText ; let i = index">
-        <ion-item>
-          <ion-card [style.backgroundColor]="changeColor()">
+        <ion-item (click)="goToEdit(note.note_id)">
+          <ion-card>
             <ion-card-header>
               <ion-card-title>{{note.title}}</ion-card-title>
             </ion-card-header>
@@ -33,7 +33,7 @@
         </ion-item>
         <ion-item-options side="end">
           <ion-card color="danger">
-            <ion-item-option color="danger">
+            <ion-item-option color="danger" (click)="remove(note.note_id)">
               <ion-icon name="trash" slot="icon-only"></ion-icon>
             </ion-item-option>
           </ion-card>
@@ -44,7 +44,7 @@
     <!-- <ion-list>
       <ion-item-sliding >
         <ion-item>
-          <ion-card [style.backgroundColor]="changeColor()">
+          <ion-card [style.backgroundColor]="changeColor()" routerLink="/notes/1">
             <ion-card-header>
               <ion-card-title>UI concepts worth existing</ion-card-title>
             </ion-card-header>
@@ -59,9 +59,9 @@
         </ion-item-options>
       </ion-item-sliding>
 
-      <ion-item-sliding >
+      <ion-item-sliding>
         <ion-item>
-          <ion-card [style.backgroundColor]="changeColor()">
+          <ion-card [style.backgroundColor]="changeColor()" routerLink="/notes/1">
             <ion-card-header>
               <ion-card-title>Book Review : The Design of Everyday Things by Don Norman</ion-card-title>
             </ion-card-header>
@@ -76,9 +76,9 @@
         </ion-item-options>
       </ion-item-sliding>
 
-      <ion-item-sliding >
+      <ion-item-sliding>
         <ion-item>
-          <ion-card [style.backgroundColor]="changeColor()">
+          <ion-card [style.backgroundColor]="changeColor()" routerLink="/notes/1">
             <ion-card-header>
               <ion-card-title>Animes produced by Ufotable</ion-card-title>
             </ion-card-header>

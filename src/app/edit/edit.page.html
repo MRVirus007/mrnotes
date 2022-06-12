@@ -6,14 +6,14 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end" class="ion-margin-end">
-      <ion-button (click)="addNote()">
-        <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+      <ion-button (click)="updateNote()">
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-textarea class="font-2-1875rem" placeholder="Title" [(ngModel)]='note.title' maxLength="100"></ion-textarea>
-  <ion-textarea autoGrow="true" [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
+  <ion-textarea class="font-2-1875rem" autoGrow="true"placeholder="Title" [(ngModel)]='title' maxLength="100"></ion-textarea>
+  <ion-textarea autoGrow="true" [(ngModel)]='content' placeholder="Type something..."></ion-textarea>
 </ion-content>
