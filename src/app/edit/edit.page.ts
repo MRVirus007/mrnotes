@@ -17,7 +17,6 @@ export class EditPage implements OnInit {
     private notesService: NotesService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private navCtrl: NavController
     ) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     // eslint-disable-next-line radix

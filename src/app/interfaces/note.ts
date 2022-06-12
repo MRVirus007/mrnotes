@@ -1,6 +1,6 @@
 export interface Note {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     note_id: number;
-    title: any;
+    title: string;
     content: string;
 }

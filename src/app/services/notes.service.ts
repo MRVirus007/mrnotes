@@ -6,6 +6,7 @@ import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform, ToastController} from '@ionic/angular';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,10 @@ export class NotesService {
   readonly dbName: string = 'notes_db';
   readonly dbTable: string = 'notes';
   private dbInstance: SQLiteObject;
-  constructor(private platform: Platform, private sqlite: SQLite,public toastController: ToastController) {
+  constructor(private platform: Platform,
+    private sqlite: SQLite,
+    public toastController: ToastController,
+    private router: Router) {
     this.databaseConn();
   }
 
@@ -56,6 +60,7 @@ export class NotesService {
     INSERT INTO ${this.dbTable} (title, content) VALUES ('${note.title}', '${note.content}')`, [])
       .then(() => {
         this.presentToast('Note Saved Successfully');
+        //this.router.navigate(['/notes']);
       }, (err) => {
         this.presentToast(JSON.stringify(err.err));
       });

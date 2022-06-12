@@ -62,3 +62,31 @@ ion-title {
     font-size: 2.68rem;
     line-height: 59px;
 }
+
+.my-custom-alert {
+    font-family: Nunito;
+    font-weight: 400;
+    font-size: 1.4375rem;
+    .alert-button-group.sc-ion-alert-md {
+        button {
+            color: #FFFFFF;
+            border-radius: 5px;
+            text-transform: capitalize;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        .danger-class {
+            background: var(--ion-color-danger);
+            
+        }
+        .success-class {
+            background: #30BE71;
+        }
+    }
+    .alert-head.sc-ion-alert-md {
+        text-align: center;
+    }
+    .alert-button-group.sc-ion-alert-md {
+        justify-content: space-evenly;
+    }
+}
