@@ -13,7 +13,7 @@ export class AppComponent {
     private router: Router) {
       this.platform.backButton.subscribeWithPriority(-1, () => {
         if (this.router.url === '/notes') {
-            App.exitApp();
+            App.minimizeApp();
         }
     });
     }
