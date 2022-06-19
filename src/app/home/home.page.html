@@ -14,7 +14,7 @@
       <ion-button class="m-r-16px" *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="!isSearchbarOpened">
+      <ion-button *ngIf="!isSearchbarOpened" (click)="showAppInfo()">
         <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
