@@ -8,7 +8,7 @@ import { NotesService } from '../services/notes.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  public isSearchbarOpened  = false;
+  public isSearchbarOpened = false;
   searchText: string;
   colors = ['#3880ff', '#3dc2ff', '#5260ff', '#2dd36f', '#ffc409', '#eb445a', '#92949c'];
   constructor(public notesService: NotesService,
