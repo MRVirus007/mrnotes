@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Note } from '../interfaces/note';
 import { NotesService } from '../services/notes.service';
 @Component({
@@ -10,13 +10,23 @@ import { NotesService } from '../services/notes.service';
 })
 export class DetailPage implements OnInit {
   public note: Note;
-  constructor(public notesService: NotesService, private alertController: AlertController, private router: Router) {
+  constructor(public notesService: NotesService,
+    private alertController: AlertController,
+    private router: Router,
+    private platform: Platform) {
     this.note = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       note_id: null,
       title: '',
       content: ''
     };
+
+    //Autosave on press of back button 
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      if (this.note.title !== '') {
+        this.goBack();
+      }
+    });
   }
 
   ngOnInit() {
@@ -33,7 +43,7 @@ export class DetailPage implements OnInit {
       subHeader: '',
       message: '',
       buttons: [{
-        text:'Discard',
+        text: 'Discard',
         role: 'discard',
         cssClass: 'danger-class',
         handler: () => {
@@ -41,14 +51,14 @@ export class DetailPage implements OnInit {
         }
       },
       {
-        text:'Save',
+        text: 'Save',
         role: 'save',
         cssClass: 'success-class',
         handler: () => {
           console.log('Save');
         }
       }
-    ]
+      ]
     });
 
     await alert.present();
@@ -57,7 +67,7 @@ export class DetailPage implements OnInit {
   }
 
   switchOnRole(role) {
-    switch(role) {
+    switch (role) {
       case 'discard':
         this.note.title = '';
         this.note.content = '';
@@ -70,8 +80,8 @@ export class DetailPage implements OnInit {
     }
   }
 
-  goBack(){
-    if(this.note.title.length || this.note.content.length) {
+  goBack() {
+    if (this.note.title.length || this.note.content.length) {
       this.presentAlertMultipleButtons();
     } else {
       this.router.navigate(['/notes']);

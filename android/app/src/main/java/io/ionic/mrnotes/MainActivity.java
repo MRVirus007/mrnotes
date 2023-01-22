@@ -1,4 +1,4 @@
-package io.ionic.app;
+package io.ionic.mrnotes;
 
 import com.getcapacitor.BridgeActivity;
 
