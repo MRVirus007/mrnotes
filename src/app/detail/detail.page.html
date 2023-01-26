@@ -14,6 +14,12 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-textarea class="font-2-1875rem" placeholder="Title" [(ngModel)]='note.title' rows=1 autoGrow="true" maxLength="60"></ion-textarea>
-  <ion-textarea autoGrow="true" [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
+  <ion-textarea class="font-2-1875rem" placeholder="Title" [(ngModel)]='note.title' rows=1 autoGrow="true"
+    maxLength="60"></ion-textarea>
+  <ion-textarea autoGrow="true" #textarea [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
+  <ion-fab class="text-center">
+    <ion-fab-button (click)="startListening()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

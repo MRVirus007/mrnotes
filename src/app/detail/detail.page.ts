@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Note } from '../interfaces/note';
 import { NotesService } from '../services/notes.service';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.page.html',
@@ -13,7 +14,8 @@ export class DetailPage implements OnInit {
   constructor(public notesService: NotesService,
     private alertController: AlertController,
     private router: Router,
-    private platform: Platform) {
+    private platform: Platform,
+    private speechRecognition: SpeechRecognition) {
     this.note = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       note_id: null,
@@ -86,5 +88,26 @@ export class DetailPage implements OnInit {
     } else {
       this.router.navigate(['/notes']);
     }
+  }
+
+  startListening() {
+    this.speechRecognition.isRecognitionAvailable()
+      .then((available: boolean) => {
+        if (available) {
+          this.speechRecognition.requestPermission()
+            .then(
+              () => {
+                this.speechRecognition.startListening()
+                  .subscribe(
+                    (matches: string[]) => {
+                      this.note.content += matches[0];
+                    },
+                    (onerror) => console.log('error:', onerror)
+                  )
+              },
+              () => console.log('Denied')
+            )
+        }
+      })
   }
 }
