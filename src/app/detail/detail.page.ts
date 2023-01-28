@@ -49,11 +49,10 @@ export class DetailPage implements OnInit {
       await SpeechRecognition.addListener("partialResults", (data: any) => {
         //for iOS replace "value" keyword with "matches"
         if (data.value && data.value.length > 0) {
-          this.placeholder = data.value[0];
+          this.placeholder = data.value[0] + ' ';
           //this.changeDetectorRef.detectChanges();
         }
-      })
-
+      });
     }
   }
 

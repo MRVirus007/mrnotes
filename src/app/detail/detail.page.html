@@ -16,16 +16,18 @@
 <ion-content class="ion-padding">
   <ion-textarea class="font-2-1875rem" placeholder="Title" [(ngModel)]='note.title' rows=1 autoGrow="true"
     maxLength="60"></ion-textarea>
-  <ion-textarea autoGrow="true" #textarea [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
+  <ion-textarea autoGrow="true" #textarea [(ngModel)]='note.content'
+    placeholder="Type or say something..."></ion-textarea>
 
-  <ion-button (click)="startRecognition()" *ngIf="!recording">
-    <ion-icon name="mic-outline" slot="start">
-      Speak
-    </ion-icon>
-  </ion-button>
-  <ion-button (click)="stopRecognition()" color="danger" *ngIf="recording">
-    <ion-icon name="mic-outline" slot="start">
-      Stop
-    </ion-icon>
-  </ion-button>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center" *ngIf="!recording">
+    <ion-fab-button (click)="startRecognition()" class="btn-grey">
+      <ion-icon name="mic-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center" *ngIf="recording">
+    <ion-fab-button (click)="stopRecognition()" class="btn-danger">
+      <ion-icon name="mic-off-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

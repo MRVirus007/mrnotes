@@ -27,3 +27,29 @@ ion-content {
         font-size: 1.4375rem;
     }
 }
+
+.btn-grey::part(native) {
+    background-color: #3b3b3b;
+    border-radius: 1em;
+}
+
+.btn-grey::part(native):hover::after {
+    background-color: #3b3b3b;
+}
+
+.btn-grey::part(native):active::after {
+    background-color: #3b3b3b;
+}
+
+.btn-danger::part(native) {
+    background-color: var(--ion-color-danger);
+    border-radius: 1em;
+}
+
+.btn-danger::part(native):hover::after {
+    background-color: var(--ion-color-danger);
+}
+
+.btn-danger::part(native):active::after {
+    background-color: var(--ion-color-danger);
+}
