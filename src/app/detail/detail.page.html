@@ -17,9 +17,15 @@
   <ion-textarea class="font-2-1875rem" placeholder="Title" [(ngModel)]='note.title' rows=1 autoGrow="true"
     maxLength="60"></ion-textarea>
   <ion-textarea autoGrow="true" #textarea [(ngModel)]='note.content' placeholder="Type something..."></ion-textarea>
-  <ion-fab class="text-center">
-    <ion-fab-button (click)="startListening()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+
+  <ion-button (click)="startRecognition()" *ngIf="!recording">
+    <ion-icon name="mic-outline" slot="start">
+      Speak
+    </ion-icon>
+  </ion-button>
+  <ion-button (click)="stopRecognition()" color="danger" *ngIf="recording">
+    <ion-icon name="mic-outline" slot="start">
+      Stop
+    </ion-icon>
+  </ion-button>
 </ion-content>

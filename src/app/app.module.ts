@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +17,6 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
     AppRoutingModule,
     IonicStorageModule.forRoot()],
   providers: [SQLite,
-    SpeechRecognition,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
