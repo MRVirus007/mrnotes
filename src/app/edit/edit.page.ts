@@ -31,9 +31,7 @@ export class EditPage implements OnInit {
 
     //Autosave on press of back button 
     this.platform.backButton.subscribeWithPriority(10, () => {
-      if (this.title !== '') {
-        this.updateNote();
-      }
+      this.updateNote();
     });
 
     SpeechRecognition.requestPermission();
@@ -69,9 +67,13 @@ export class EditPage implements OnInit {
   ngOnInit() {
   }
   updateNote() {
-    this.notesService.updateNote(this.id, this.title, this.content).then(() => {
+    if (this.title !== '') {
+      this.notesService.updateNote(this.id, this.title, this.content).then(() => {
+        this.router.navigate(['/notes']);
+      });
+    } else {
       this.router.navigate(['/notes']);
-    });
+    }
   }
 
 }

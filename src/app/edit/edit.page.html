@@ -14,6 +14,18 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-textarea class="font-2-1875rem" autoGrow="true"placeholder="Title" [(ngModel)]='title' maxLength="100"></ion-textarea>
-  <ion-textarea autoGrow="true" [(ngModel)]='content' placeholder="Type something..."></ion-textarea>
+  <ion-textarea class="font-2-1875rem" autoGrow="true" placeholder="Title" [(ngModel)]='title'
+    maxLength="100"></ion-textarea>
+  <ion-textarea autoGrow="true" [(ngModel)]='content' placeholder="Type or say something..."></ion-textarea>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center" *ngIf="!recording">
+    <ion-fab-button (click)="startRecognition()" class="btn-grey">
+      <ion-icon name="mic-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center" *ngIf="recording">
+    <ion-fab-button (click)="stopRecognition()" class="btn-danger">
+      <ion-icon name="mic-off-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

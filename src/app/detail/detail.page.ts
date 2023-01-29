@@ -27,9 +27,7 @@ export class DetailPage implements OnInit {
 
     //Autosave on press of back button 
     this.platform.backButton.subscribeWithPriority(10, () => {
-      if (this.note.title !== '') {
-        this.goBack();
-      }
+      this.goBack();
     });
 
     SpeechRecognition.requestPermission();
